@@ -1,4 +1,5 @@
 import { useState } from "react";
+import DropDown from "./DropDown";
 
 function FormResume() {
   const [pdfFile, setPdfFile] = useState(null);
@@ -28,8 +29,11 @@ function FormResume() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-semibold mb-4 text-center">Upload Resume (PDF)</h2>
+    <div className="flex flex-col items-center justify-center min-h-screen ">
+      <DropDown />
+      <h2 className="text-2xl font-semibold mb-4 text-center">
+        Upload Resume (PDF)
+      </h2>
       <form onSubmit={handleSubmit}>
         <input
           type="file"

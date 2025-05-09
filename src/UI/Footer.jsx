@@ -6,8 +6,11 @@ function Footer() {
       <p className="text-sm text-stone-800">
         &copy; {new Date().getFullYear()} Ultimez{" "}
       </p>
-      <p>&copy; Ultimez</p>
-      <a href="https://github.com/AnshRiteshSavadatti" className={className}>
+      <p className="text-sm text-stone-800">All rights reserved. </p>
+      <a
+        href="https://github.com/AnshRiteshSavadatti/AI-Based-Resume-Screener-ULTIMEZ"
+        className={className}
+      >
         GitHub
       </a>
     </footer>

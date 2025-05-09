@@ -5,7 +5,7 @@ function HomePage() {
   const [activeForm, setActiveForm] = useState("login"); // 'login' or 'signup'
 
   return (
-    <div className="p-8 max-w-4xl mx-auto text-center">
+    <div className="p-8 max-w-4xl mx-auto text-center bg-white h-lvh mt-10 mb-10">
       <h1 className="text-4xl font-bold mb-4">
         Welcome to the AI-Based Resume Screener
       </h1>
