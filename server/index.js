@@ -1,18 +1,32 @@
 import express from "express";
 import multer from "multer";
 import cors from "cors";
-import fs from "fs";
-import path from "path";
+
+import authRouter from "./routes/auth.routes.js";
+import connnectToDatabase from "./database/mongodb.js";
 
 const app = express();
 const PORT = 5000;
 
+connnectToDatabase();
+
 // Allow frontend requests
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// using routes now
+
+app.use("/api/auth", authRouter);
 
 // Use multer to handle file uploads
 const storage = multer.memoryStorage(); // store in memory (you can also save to disk)
 const upload = multer({ storage });
+
+app.post("/", (req, res) => {
+  console.log("Received request:", req.body);
+  res.json({ message: "Hello from the server!" });
+});
 
 app.post("/upload", upload.array("resume", 10), (req, res) => {
   const files = req.files;

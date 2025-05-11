@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
   const [activeForm, setActiveForm] = useState("login"); // 'login' or 'signup'
@@ -41,15 +42,47 @@ function HomePage() {
 }
 
 function LoginForm() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/sign-in", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem("token", data.token);
+        navigate("/form");
+      } else {
+        alert(data.message || "Login failed");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Server error");
+    }
+  };
+
   return (
-    <form className="flex flex-col items-center">
+    <form onSubmit={handleLogin} className="flex flex-col items-center">
       <input
         type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
         className="mb-4 p-2 border border-gray-300 rounded-lg w-full max-w-sm"
       />
       <input
         type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
         className="mb-4 p-2 border border-gray-300 rounded-lg w-full max-w-sm"
       />
@@ -61,20 +94,55 @@ function LoginForm() {
 }
 
 function SignupForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/sign-up", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem("token", data.token);
+        navigate("/form");
+      } else {
+        alert(data.message || "Signup failed");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Server error");
+    }
+  };
+
   return (
-    <form className="flex flex-col items-center">
+    <form onSubmit={handleSignup} className="flex flex-col items-center">
       <input
         type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
         placeholder="Full Name"
         className="mb-4 p-2 border border-gray-300 rounded-lg w-full max-w-sm"
       />
       <input
         type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
         className="mb-4 p-2 border border-gray-300 rounded-lg w-full max-w-sm"
       />
       <input
         type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         placeholder="Create Password"
         className="mb-4 p-2 border border-gray-300 rounded-lg w-full max-w-sm"
       />
