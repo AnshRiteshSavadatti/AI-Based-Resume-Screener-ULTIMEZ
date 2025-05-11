@@ -25,7 +25,7 @@ function FormResume() {
 
     try {
       const response = await fetch(
-        "https://ai-based-resume-screener-ultimez-backend.vercel.app/upload",
+        "https://ai-based-resume-screener-ultimez-backend.vercel.app/upload", 
         {
           method: "POST",
           body: formData,

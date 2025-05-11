@@ -59,6 +59,4 @@ app.post("/upload", upload.array("resume", 10), (req, res) => {
   res.json({ message: "Files received!", count: files.length });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+export default app;
