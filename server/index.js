@@ -10,15 +10,18 @@ const PORT = 5000;
 
 connnectToDatabase();
 
+const allowedOrigins = ["https://ai-based-resume-screener-ultimez.vercel.app"];
+
 app.use(
   cors({
-    origin: "https://ai-based-resume-screener-ultimez.vercel.app", // no trailing slash!
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-    maxAge: 86400,
   })
 );
 
