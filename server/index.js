@@ -15,6 +15,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+cors({
+  origin: "https://ai-based-resume-screener-ultimez.vercel.app/", // Replace with your frontend URL
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+  preflightContinue: false,
+  optionsSuccessStatus: 204, // Some legacy browsers (IE11, various SmartTVs) choke on 204
+  maxAge: 86400, // Cache preflight response for 24 hours
+});
 // using routes now
 
 app.use("/api/auth", authRouter);
