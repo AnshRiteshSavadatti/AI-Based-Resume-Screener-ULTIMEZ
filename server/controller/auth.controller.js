@@ -40,7 +40,7 @@ export const signUp = async function (req, res, next) {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUsers = await User.create(
-      [{ name, email, password: hashedPassword }],
+      [{ name, email, password: hashedPassword }],  
       { session }
     );
     // newUsers is an array of users
