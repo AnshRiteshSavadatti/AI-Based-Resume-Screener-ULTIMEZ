@@ -14,20 +14,22 @@ app.use(cors());
 const storage = multer.memoryStorage(); // store in memory (you can also save to disk)
 const upload = multer({ storage });
 
-app.post("/upload", upload.single("resume"), (req, res) => {
-  const file = req.file;
+app.post("/upload", upload.array("resume", 10), (req, res) => {
+  const files = req.files;
 
-  if (!file) {
-    return res.status(400).json({ message: "No file uploaded" });
+  if (!files || files.length === 0) {
+    return res.status(400).json({ message: "No files uploaded" });
   }
 
-  console.log("Received file:");
-  console.log("Original name:", file.originalname);
-  console.log("MIME type:", file.mimetype);
-  console.log("Size (bytes):", file.size);
+  files.forEach((file, index) => {
+    console.log(`File ${index + 1}:`);
+    console.log("Original name:", file.originalname);
+    console.log("MIME type:", file.mimetype);
+    console.log("Size (bytes):", file.size);
+    console.log("-----------");
+  });
 
-  // You can now process file.buffer (like running NLP on PDF)
-  res.json({ message: "File received!", filename: file.originalname });
+  res.json({ message: "Files received!", count: files.length });
 });
 
 app.listen(PORT, () => {

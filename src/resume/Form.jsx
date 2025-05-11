@@ -2,18 +2,26 @@ import { useState } from "react";
 import DropDown from "./DropDown";
 
 function FormResume() {
-  const [pdfFile, setPdfFile] = useState(null);
+  const [pdfFiles, setPdfFiles] = useState([]);
+  const [selectedSkills, setSelectedSkills] = useState([]);
 
   const handleFileChange = (e) => {
-    setPdfFile(e.target.files[0]);
+    setPdfFiles(e.target.files);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!pdfFile) return alert("Please select a PDF file.");
+    if (selectedSkills.length === 0) {
+      alert("Please select at least one skill before uploading the PDF.");
+      return;
+    }
+
+    if (!pdfFiles) return alert("Please select a PDF file.");
 
     const formData = new FormData();
-    formData.append("resume", pdfFile);
+    [...pdfFiles].forEach((file) => {
+      formData.append("resume", file);
+    });
 
     try {
       const response = await fetch("http://localhost:5000/upload", {
@@ -30,7 +38,10 @@ function FormResume() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen ">
-      <DropDown />
+      <DropDown
+        selectedSkills={selectedSkills}
+        setSelectedSkills={setSelectedSkills}
+      />
       <h2 className="text-2xl font-semibold mb-4 text-center">
         Upload Resume (PDF)
       </h2>
@@ -38,6 +49,7 @@ function FormResume() {
         <input
           type="file"
           accept="application/pdf"
+          multiple
           onChange={handleFileChange}
           className="block w-full text-sm text-gray-700
                      file:mr-4 file:py-2 file:px-4
