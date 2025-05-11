@@ -5,8 +5,8 @@
     { "src": "src/main.jsx", "use": "@vercel/static-build" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/server/index.js" },
-    { "src": "/upload", "dest": "/server/index.js" },
+    { "src": "/upload", "dest": "server/index.js" },
+    { "src": "/api/(.*)", "dest": "server/index.js" },
     { "src": "/(.*)", "dest": "/src/index.html" }
   ],
   "functions": {
