@@ -24,10 +24,13 @@ function FormResume() {
     });
 
     try {
-      const response = await fetch("http://localhost:5000/upload", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "https://ai-based-resume-screener-ultimez-6p3p.vercel.app/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       const result = await response.json();
       console.log("Server Response:", result);

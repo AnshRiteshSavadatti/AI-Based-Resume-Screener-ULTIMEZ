@@ -50,11 +50,14 @@ function LoginForm() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/sign-in", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await fetch(
+        "https://ai-based-resume-screener-ultimez-6p3p.vercel.app/api/auth/sign-in",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       const data = await res.json();
 
@@ -103,11 +106,14 @@ function SignupForm() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/sign-up", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      });
+      const res = await fetch(
+        "https://ai-based-resume-screener-ultimez-6p3p.vercel.app/api/auth/sign-up",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, password }),
+        }
+      );
 
       const data = await res.json();
 
