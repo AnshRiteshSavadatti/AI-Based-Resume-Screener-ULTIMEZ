@@ -38,12 +38,12 @@ app.use("/api/auth", authRouter);
 app.use("/api", uploadRouter);
 
 app.post("/", (req, res) => {
-  console.log("Received request:", req.body); 
+  console.log("Received request:", req.body);
   res.json({ message: "Hello from the server!" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server is running on http://localhost:${PORT}`);
+// });
 
-// export default app;
+export default app;
