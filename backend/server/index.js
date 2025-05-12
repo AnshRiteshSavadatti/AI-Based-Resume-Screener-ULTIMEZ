@@ -38,7 +38,7 @@ app.use("/api/auth", authRouter);
 app.use("/api", uploadRouter);
 
 app.post("/", (req, res) => {
-  console.log("Received request:", req.body);
+  console.log("Received request:", req.body); 
   res.json({ message: "Hello from the server!" });
 });
 
