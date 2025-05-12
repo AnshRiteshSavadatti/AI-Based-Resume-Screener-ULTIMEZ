@@ -3,6 +3,7 @@ import AppLayout from "./UI/AppLayout";
 import Error from "./UI/Error";
 import HomePage from "./UI/HomePage";
 import FormResume from "./resume/Form";
+import GenerateScore from "./generateScore/GenerateScore";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "/form",
         element: <FormResume />,
+      },
+      {
+        path: "/generate-score",
+        element: <GenerateScore />,
       },
     ],
   },

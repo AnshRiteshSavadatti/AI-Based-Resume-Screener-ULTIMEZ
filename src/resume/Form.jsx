@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import DropDown from "./DropDown";
 
 function FormResume() {
+  const navigate = useNavigate(); // Hook to navigate
   const [pdfFiles, setPdfFiles] = useState([]);
   const [selectedSkills, setSelectedSkills] = useState([]);
 
@@ -25,7 +28,8 @@ function FormResume() {
 
     try {
       const response = await fetch(
-        "https://ai-based-resume-screener-ultimez.vercel.app/upload",
+        // "https://ai-based-resume-screener-ultimez.vercel.app/upload",
+        "http://localhost:5000/api/parse-resumes",
         {
           method: "POST",
           body: formData,
@@ -33,6 +37,13 @@ function FormResume() {
       );
 
       const result = await response.json();
+      if (result.success) {
+        alert("Resumes uploaded and parsed successfully!");
+        navigate("/generate-score");
+      } else {
+        alert("Something went wrong: " + result.error);
+      }
+
       console.log("Server Response:", result);
     } catch (error) {
       console.error("Upload error:", error);
