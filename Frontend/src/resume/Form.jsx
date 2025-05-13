@@ -38,6 +38,9 @@ function FormResume() {
 
       const result = await response.json();
       if (result.success) {
+        // Store parsed resume data and selected skills in localStorage
+        localStorage.setItem("parsedResumes", JSON.stringify(result.results));
+        localStorage.setItem("selectedSkills", JSON.stringify(selectedSkills));
         alert("Resumes uploaded and parsed successfully!");
         navigate("/generate-score");
       } else {
