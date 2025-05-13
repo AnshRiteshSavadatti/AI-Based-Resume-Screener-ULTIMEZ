@@ -51,8 +51,8 @@ function LoginForm() {
 
     try {
       const res = await fetch(
-        // "https://ai-based-resume-screener-ultimez-backend.vercel.app/api/auth/sign-in",
-        "http://localhost:5000/api/auth/sign-in",
+        "https://ai-based-resume-screener-ultimez.onrender.com//api/auth/sign-in",
+        // "http://localhost:5000/api/auth/sign-in",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -108,7 +108,7 @@ function SignupForm() {
 
     try {
       const res = await fetch(
-        "https://ai-based-resume-screener-ultimez-backend.vercel.app/api/auth/sign-up",
+        "https://ai-based-resume-screener-ultimez.onrender.com//api/auth/sign-up",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

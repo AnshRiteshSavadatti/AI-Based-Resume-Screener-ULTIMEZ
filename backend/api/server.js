@@ -15,8 +15,7 @@ connnectToDatabase();
 const __dirname = path.resolve();
 
 const allowedOrigins = [
-  "https://ai-based-resume-screener-ultimez.vercel.app",
-  "http://localhost:5173",
+  "https://ai-based-resume-screener-ultimez.onrender.com",
 ];
 
 // For development, allow all origins by commenting out origin check
