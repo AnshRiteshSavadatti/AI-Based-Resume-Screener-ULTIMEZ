@@ -18,30 +18,27 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: function (origin, callback) {
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps or curl requests)
       if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+        return callback(null, true);
       }
+      return callback(new Error("Not allowed by CORS"));
     },
-    credentials: true,
+    methods: "GET,POST,PUT,DELETE,OPTIONS", // Add allowed methods
+    allowedHeaders: "Content-Type, Authorization", // Add allowed headers
+    credentials: true, // If you need to support cookies or authentication
   })
 );
 
-// Handle preflight OPTIONS requests
+// Handle preflight OPTIONS requests globally
 app.options(
   "*",
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
+  (req, res, next) => {
+    console.log("Received OPTIONS request for:", req.headers.origin);
+    next();
+  },
+  cors()
 );
 
 app.use(express.json());
@@ -57,8 +54,8 @@ app.post("/", (req, res) => {
   res.json({ message: "Hello from the server!" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server is running on http://localhost:${PORT}`);
+// });
 
-// export default app;
+export default app;
