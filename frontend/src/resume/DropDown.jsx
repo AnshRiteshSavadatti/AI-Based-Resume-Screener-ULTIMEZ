@@ -3,7 +3,7 @@ import { useState } from "react";
 function DropDown({ selectedSkills, setSelectedSkills }) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const skills = [
+  const defaultSkills = [
     "Machine Learning",
     "Web Development",
     "Data Science",
@@ -21,6 +21,9 @@ function DropDown({ selectedSkills, setSelectedSkills }) {
     "Game Development",
   ];
 
+  // Combine default + custom (deduplicated)
+  const allSkills = Array.from(new Set([...defaultSkills, ...selectedSkills]));
+
   const toggleSkill = (skill) => {
     setSelectedSkills((prev) =>
       prev.includes(skill) ? prev.filter((s) => s !== skill) : [...prev, skill]
@@ -31,20 +34,32 @@ function DropDown({ selectedSkills, setSelectedSkills }) {
     setSelectedSkills((prev) => prev.filter((s) => s !== skill));
   };
 
-  const filteredSkills = skills.filter((skill) =>
+  const handleInputKeyDown = (e) => {
+    if (e.key === "Enter" && searchTerm.trim() !== "") {
+      e.preventDefault();
+      const newSkill = searchTerm.trim();
+      if (!selectedSkills.includes(newSkill)) {
+        setSelectedSkills([...selectedSkills, newSkill]);
+      }
+      setSearchTerm("");
+    }
+  };
+
+  const filteredSkills = allSkills.filter((skill) =>
     skill.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <div className="relative w-72 mb-6">
-      <h2 className="text-lg font-semibold mb-2">Select Skills</h2>
+      <h2 className="text-lg font-semibold mb-2">Select or Add Skills</h2>
 
-      {/* Search Input */}
+      {/* Search / Add Input */}
       <input
         type="text"
-        placeholder="Search skills..."
+        placeholder="Type or search skills, press Enter to add"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
+        onKeyDown={handleInputKeyDown}
         className="w-full px-3 py-2 mb-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
       />
 

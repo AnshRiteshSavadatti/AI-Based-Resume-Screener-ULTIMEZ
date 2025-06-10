@@ -3,7 +3,9 @@ import AppLayout from "./UI/AppLayout";
 import Error from "./UI/Error";
 import HomePage from "./UI/HomePage";
 import FormResume from "./resume/Form";
-import GenerateScore from "./generateScore/GenerateScore";
+import GenerateScore, {
+  matchedResumesLoader,
+} from "./generateScore/GenerateScore";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,7 @@ const router = createBrowserRouter([
       {
         path: "/generate-score",
         element: <GenerateScore />,
+        loader: matchedResumesLoader, // Loader to fetch matched resumes
       },
     ],
   },

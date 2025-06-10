@@ -26,6 +26,8 @@ function FormResume() {
       formData.append("resume", file);
     });
 
+    formData.append("jobDescription", JSON.stringify(selectedSkills));
+
     try {
       const response = await fetch(
         "https://ai-based-resume-screener-ultimez.onrender.com/api/parse-resumes",
