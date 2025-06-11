@@ -109,7 +109,9 @@ uploadRouter.post(
 
         const matcherPayload = {
           resume: normalizedResume,
-          jobDescription,
+          jobDescription: {
+            jobDescription,
+          },
         };
 
         console.log("Parsed Apilayer response:", parsed);
