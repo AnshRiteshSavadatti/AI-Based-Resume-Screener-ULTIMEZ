@@ -50,8 +50,8 @@ function GenerateScore() {
 export const matchedResumesLoader = async () => {
   try {
     const response = await fetch(
-      // "https://ai-based-resume-screener-ultimez.onrender.com/api/matched-resumes"
-      "http://localhost:5000/api/matched-resumes"
+      "https://ai-based-resume-screener-ultimez.onrender.com/api/matched-resumes"
+      // "http://localhost:5000/api/matched-resumes"
     );
 
     if (!response.ok) {

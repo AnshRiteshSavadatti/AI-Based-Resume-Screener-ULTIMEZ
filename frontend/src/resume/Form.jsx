@@ -30,8 +30,8 @@ function FormResume() {
 
     try {
       const response = await fetch(
-        // "https://ai-based-resume-screener-ultimez.onrender.com/api/parse-resumes",
-        "http://localhost:5000/api/parse-resumes",
+        "https://ai-based-resume-screener-ultimez.onrender.com/api/parse-resumes",
+        // "http://localhost:5000/api/parse-resumes",
         {
           method: "POST",
           body: formData,
