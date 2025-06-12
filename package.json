@@ -1,0 +1,23 @@
+{
+  "type": "module",
+  "name": "mern-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon backend/api/server.js",
+    "build": "npm install && cd frontend && npm install --include=dev && npm run build && cd ..",
+    "start": "npm run build && node backend/api/server.js"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "bcryptjs": "^3.0.2",
+    "caniuse-lite": "^1.0.30001718",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.16.0",
+    "mongoose": "^8.14.2",
+    "multer": "^1.4.5-lts.2"
+  }
+}
